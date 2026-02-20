@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="进制 二进制：以 0b 或 0B 开头 八进制：以 0 开头 十六进制：以 0x 或 0X 开头，A - F 不区分大小写 int n1 = 0b1010; // 二进制 int n2 = 037; // 八进制 int n3 = 0x3f; // 十六进制 原码、反码、补码 0 的反码、补码均为 0\n">
+<title>Learning_Java_Day_3</title>
+
+<link rel='canonical' href='https://example.org/post/java/learning_java_day_003/'>
+
+<link rel="stylesheet" href="/scss/style.min.b854309e88021541136cdc445ca4fab95efa95cdae461c13560b329efbd2ff7d.css"><meta property='og:title' content="Learning_Java_Day_3">
+<meta property='og:description' content="进制 二进制：以 0b 或 0B 开头 八进制：以 0 开头 十六进制：以 0x 或 0X 开头，A - F 不区分大小写 int n1 = 0b1010; // 二进制 int n2 = 037; // 八进制 int n3 = 0x3f; // 十六进制 原码、反码、补码 0 的反码、补码均为 0\n">
+<meta property='og:url' content='https://example.org/post/java/learning_java_day_003/'>
+<meta property='og:site_name' content='Swarm&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='java-basics' /><meta property='article:published_time' content='2025-09-22T17:11:31&#43;08:00'/><meta property='article:modified_time' content='2025-09-22T17:11:31&#43;08:00'/>
+<meta name="twitter:title" content="Learning_Java_Day_3">
+<meta name="twitter:description" content="进制 二进制：以 0b 或 0B 开头 八进制：以 0 开头 十六进制：以 0x 或 0X 开头，A - F 不区分大小写 int n1 = 0b1010; // 二进制 int n2 = 037; // 八进制 int n3 = 0x3f; // 十六进制 原码、反码、补码 0 的反码、补码均为 0\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<style>
+.reveal-text {
+  background-color: #000;
+  color: #000;
+  border-radius: 2px;
+  text-shadow: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.reveal-text:hover {
+  background-color: transparent;
+  color: inherit;
+}
+
+[data-scheme="dark"] .reveal-text {
+  background-color: #000;
+  color: #000;
+}
+
+[data-scheme="dark"] .reveal-text:hover {
+  background-color: transparent;
+  color: #c9d1d9;
+}
+
+[data-scheme="light"] .reveal-text:hover {
+  color: #24292f;
+}
+</style>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_a6c30e58bf92fe3a.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">❤️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Swarm&#39;s blog</a></h1>
+            <h2 class="site-description">保持好奇，保持热爱</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/1890508137'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/swarm365'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:neuroai@foxmail.com'
+                        target="_blank"
+                        title="neuroai@foxmail.com"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/tech/" style="background-color: hsl(154, 60%, 84%); color: #fff;">
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/java/learning_java_day_003/">Learning_Java_Day_3</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-09-22T17:11:31&#43;08:00'>Sep 22, 2025</time>
+            </div>
+        
+
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39" /></svg>
+            <time class="article-time--updated" datetime='2025-09-22T17:11:31&#43;08:00'>Sep 22, 2025 17:11 CST</time>
+        </div>
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 2 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="进制">进制
+</h1><ol>
+<li>二进制：以 <code>0b</code> 或 <code>0B</code> 开头</li>
+<li>八进制：以 <code>0</code> 开头</li>
+<li>十六进制：以 <code>0x</code> 或 <code>0X</code> 开头，<code>A</code> - <code>F</code> 不区分大小写</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> 0b1010; <span style="color:#75715e">// 二进制</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> n2 <span style="color:#f92672">=</span> 037; <span style="color:#75715e">// 八进制</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> n3 <span style="color:#f92672">=</span> 0x3f; <span style="color:#75715e">// 十六进制</span>
+</span></span></code></pre></div><h1 id="原码反码补码">原码、反码、补码
+</h1><p><strong>0</strong> 的反码、补码均为 0</p>
+<p>Java 不存在 <del>无符号数</del> ，换言之，所有数字都是 <strong>有符号</strong> 的</p>
+<p>计算机运算时采用 <strong>补码</strong> 方式运算</p>
+<p>我们看运算结果时，看的是 <strong>原码</strong></p>
+<h1 id="位运算符">位运算符
+</h1><p>Java 中有 7 个位运算符：</p>
+<p><code>&amp;</code> 按位与
+<code>|</code> 按位或
+<code>^</code> 按位异或
+<code>~</code> 按位取反
+<code>&gt;&gt;</code> 算术右移	低位溢出，符号位不变，并用符号位补溢出的高位
+<code>&lt;&lt;</code> 算术左移	符号位不变，低位补 0
+<code>&gt;&gt;&gt;</code> 逻辑右移也叫无符号右移	低位溢出，高位补 0
+特别说明：没有 &laquo;&lt; 符号</p>
+<p>以 <code>~</code> 按位取反为例，前 4 个同理</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>				<span style="color:#75715e">//先将数字全部转成 2 进制补码，再做运算，最后转成的原码即为结果</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				1. 先将 2 转为补码，因为是正数，那么就是原码， int 为 4 字节， 则有 4*8=32 个 bit 位
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				00000000 00000000 00000000 00000010 注意，首位为符号位， 0 为正， 1 为负
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				2. 执行按位取反操作
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				11111111 11111111 11111111 11111101
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				3. 将上步运算结果转成原码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				11111111 11111111 11111111 11111101 很明显，此补码为负数（符号位为 1 ），应先转为反码，再转为原码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				11111111 11111111 11111111 11111100 转换成反码
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				10000000 00000000 00000000 00000011 转换成原码，数值位为 3 ，符号位为 1 ，为负数，则结果为 -3
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">				*/</span>
+</span></span><span style="display:flex;"><span>				System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#f92672">~</span>2); <span style="color:#75715e">// 输出 -3</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>				<span style="color:#75715e">//先将数字全部转成 2 进制补码，再做运算，最后转成的原码即为结果</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> a <span style="color:#f92672">=</span> 3 <span style="color:#f92672">&lt;&lt;</span> 4; <span style="color:#75715e">// 相当于 3*2的4次幂，输出 48</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> b <span style="color:#f92672">=</span> 55 <span style="color:#f92672">&gt;&gt;</span> 3; <span style="color:#75715e">// 相当于 55/2/2/2，则为 27/2/2，13/2，输出 6</span>
+</span></span></code></pre></div><h1 id="取模">取模
+</h1><p><code>a % b</code> 当 a 为 <strong>小数</strong> 时，公式 = a - (int) a / b * b</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> c <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>10.<span style="color:#a6e22e">5</span> <span style="color:#f92672">%</span> 3; <span style="color:#75715e">// -10.5 - (-10)/3 * 3，先化简为 -10.5 + 10/3 * 3 再计算，输出 -1.5</span>
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">int</span> d <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>10.<span style="color:#a6e22e">4</span> <span style="color:#f92672">%</span> 3; <span style="color:#75715e">// 输出 -1.4 的近似值</span>
+</span></span></code></pre></div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java-basics/">Java基础</a>
+        
+    </section>
+
+
+    
+</footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_002/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_2</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_001/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_1</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Swarm&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    function backToTop(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      let totopBtn = document.getElementById('back-to-top');
+      if (!totopBtn) return;
+
+      totopBtn.addEventListener('click', backToTop, false);
+
+      function toggleBackToTop() {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop > 200) {
+          totopBtn.classList.add('visible');
+        } else {
+          totopBtn.classList.remove('visible');
+        }
+      }
+
+      toggleBackToTop();
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    });
+</script>
+
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<a href="#" id="back-to-top" title="返回顶部"></a>
+
+
+<style>
+  #back-to-top {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    position: fixed;
+    bottom: 5px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--body-background);
+    box-shadow: var(--shadow-l2);
+    font-size: 20px;
+    text-align: center;
+    line-height: 38px;
+    cursor: pointer;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease,
+      transform 0.4s ease,
+      background-color 0.3s ease;
+    z-index: 1000;
+  }
+
+  #back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  #back-to-top:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    transform: rotate(135deg);
+    height: 8px;
+    width: 8px;
+    border-width: 0 0 2px 2px;
+    border-color: var(--accent-color);
+    border-style: solid;
+  }
+
+  #back-to-top:hover {
+    transform: translateY(0) scale(1.1);
+    background-color: var(--accent-color);
+  }
+
+  #back-to-top:hover:before {
+    border-color: var(--accent-color-text);
+  }
+
+   
+  @media screen and (max-width: 768px) {
+    #back-to-top {
+      bottom: 5px;
+      right: var(--container-padding);
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    #back-to-top {
+      bottom: 10px;
+      right: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+
+  @media screen and (min-width: 1536px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+</style>
+
+    </body>
+</html>

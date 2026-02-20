@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="集合 集合主要是两组（单列集合，双列集合） Collection 接口有两个重要的子接口 List Set，他们的实现子类都是单列集合 Map 接口的实现子类是双列集合，存放的 key-value Collection 接口 Collection 实现子类可以存放多个元素，每个元素可以是 Object 有些 Collection 的实现类，可以存放重复的元素，有些不可以 有些 Collection 的实现类，有些是有序的（List），有些不是有序（Set） Collection 接口没有直接的实现子类，是通过它的子接口 Set 和 List 来实现的 遍历元素方式\n">
+<title>Learning_Java_Day_21-28</title>
+
+<link rel='canonical' href='https://example.org/post/java/learning_java_day_021-028/'>
+
+<link rel="stylesheet" href="/scss/style.min.b854309e88021541136cdc445ca4fab95efa95cdae461c13560b329efbd2ff7d.css"><meta property='og:title' content="Learning_Java_Day_21-28">
+<meta property='og:description' content="集合 集合主要是两组（单列集合，双列集合） Collection 接口有两个重要的子接口 List Set，他们的实现子类都是单列集合 Map 接口的实现子类是双列集合，存放的 key-value Collection 接口 Collection 实现子类可以存放多个元素，每个元素可以是 Object 有些 Collection 的实现类，可以存放重复的元素，有些不可以 有些 Collection 的实现类，有些是有序的（List），有些不是有序（Set） Collection 接口没有直接的实现子类，是通过它的子接口 Set 和 List 来实现的 遍历元素方式\n">
+<meta property='og:url' content='https://example.org/post/java/learning_java_day_021-028/'>
+<meta property='og:site_name' content='Swarm&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='java-basics' /><meta property='article:published_time' content='2025-10-10T12:52:31&#43;08:00'/><meta property='article:modified_time' content='2025-10-10T12:52:31&#43;08:00'/>
+<meta name="twitter:title" content="Learning_Java_Day_21-28">
+<meta name="twitter:description" content="集合 集合主要是两组（单列集合，双列集合） Collection 接口有两个重要的子接口 List Set，他们的实现子类都是单列集合 Map 接口的实现子类是双列集合，存放的 key-value Collection 接口 Collection 实现子类可以存放多个元素，每个元素可以是 Object 有些 Collection 的实现类，可以存放重复的元素，有些不可以 有些 Collection 的实现类，有些是有序的（List），有些不是有序（Set） Collection 接口没有直接的实现子类，是通过它的子接口 Set 和 List 来实现的 遍历元素方式\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<style>
+.reveal-text {
+  background-color: #000;
+  color: #000;
+  border-radius: 2px;
+  text-shadow: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.reveal-text:hover {
+  background-color: transparent;
+  color: inherit;
+}
+
+[data-scheme="dark"] .reveal-text {
+  background-color: #000;
+  color: #000;
+}
+
+[data-scheme="dark"] .reveal-text:hover {
+  background-color: transparent;
+  color: #c9d1d9;
+}
+
+[data-scheme="light"] .reveal-text:hover {
+  color: #24292f;
+}
+</style>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_a6c30e58bf92fe3a.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">❤️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Swarm&#39;s blog</a></h1>
+            <h2 class="site-description">保持好奇，保持热爱</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/1890508137'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/swarm365'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:neuroai@foxmail.com'
+                        target="_blank"
+                        title="neuroai@foxmail.com"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#collection-接口">Collection 接口</a>
+      <ul>
+        <li><a href="#list-接口">List 接口</a></li>
+        <li><a href="#set-接口">Set 接口</a></li>
+      </ul>
+    </li>
+    <li><a href="#map-接口jdk-8">Map 接口（JDK 8）</a>
+      <ul>
+        <li><a href="#hashmap">HashMap</a></li>
+        <li><a href="#hashtable">Hashtable</a></li>
+        <li><a href="#treemap">TreeMap</a></li>
+      </ul>
+    </li>
+    <li><a href="#collection-工具类">Collection 工具类</a></li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/tech/" style="background-color: hsl(154, 60%, 84%); color: #fff;">
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/java/learning_java_day_021-028/">Learning_Java_Day_21-28</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-10-10T12:52:31&#43;08:00'>Oct 10, 2025</time>
+            </div>
+        
+
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39" /></svg>
+            <time class="article-time--updated" datetime='2025-10-10T12:52:31&#43;08:00'>Oct 10, 2025 12:52 CST</time>
+        </div>
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 8 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="集合">集合
+</h1><ol>
+<li>集合主要是两组（单列集合，双列集合）</li>
+<li>Collection 接口有两个重要的子接口 <strong><code>List</code></strong> <strong><code>Set</code></strong>，他们的实现子类都是单列集合</li>
+<li>Map 接口的实现子类是双列集合，存放的 key-value</li>
+</ol>
+<h2 id="collection-接口">Collection 接口
+</h2><ol>
+<li>Collection 实现子类可以存放多个元素，每个元素可以是 Object</li>
+<li>有些 Collection 的实现类，可以存放重复的元素，有些不可以</li>
+<li>有些 Collection 的实现类，有些是有序的（List），有些不是有序（Set）</li>
+<li>Collection 接口没有直接的实现子类，是通过它的子接口 Set 和 List 来实现的</li>
+</ol>
+<p>遍历元素方式</p>
+<ul>
+<li>使用迭代器（Iterator）</li>
+</ul>
+<ol>
+<li>Iterator 对象称为迭代器，主要用于遍历 Collection 集合中的元素</li>
+<li>所有实现了 Collection 接口的集合类都有一个 iterator() 方法，用以返回一个实现了 Iterator 接口的对象，即可以返回一个迭代器</li>
+<li>Iterator 仅用于遍历集合， Iterator 本身并不存放对象</li>
+</ol>
+<ul>
+<li>集合增强 for</li>
+</ul>
+<p>底层调用的仍是迭代器，相当于简化版的 Iterator</p>
+<h3 id="list-接口">List 接口
+</h3><p>List 接口是 Collection 接口的子接口</p>
+<ol>
+<li>List 集合类中元素有序（即添加顺序和取出顺序一致)，且可重复</li>
+<li>List 集合中的每个元素都有其对应的顺序索引，即支持索引</li>
+<li>List 容器中的元素都对应一个整数型的序号记载其在容器中的位置，可以根据序号存取容器中的元素</li>
+</ol>
+<p>List 集合里添加了一些根据索引来操作集合元素的方法</p>
+<ol>
+<li>void add(int index, Object ele)：在index位置插入ele元素</li>
+<li>boolean addAll(int index, Collection eles)：从index位置开始将eles中的所有元素添加进来</li>
+<li>Object get(int index)：获取指定index位置的元素</li>
+<li>int indexOf(Object obj)：返回obj在集合中首次出现的位置</li>
+<li>int lastlndexOf(Object obj)：返回obj在当前集合中末次出现的位置</li>
+<li>Object remove(int index)：移除指定index位置的元素，并返回此元素</li>
+<li>Object set(int index, Object ele)：设置指定index位置的元素为ele，相当于是替换</li>
+<li>List subList(int fromlndex, int tolndex)：返回从fromlndex到tolndex位置的子集合</li>
+</ol>
+<p>遍历元素方式
+同 collection 接口</p>
+<h4 id="arraylist">ArrayList
+</h4><ol>
+<li>ArrayList 可以存放任意类型的元素，甚至是 <code>null</code></li>
+<li>ArrayList 是由数组来实现数据存储的</li>
+<li>ArrayList 基本等同于 Vector，除了 ArrayList 是线程不安全（执行效率高）。多线程情况下，不建议使用 ArrayList</li>
+</ol>
+<p>底层操作</p>
+<ol>
+<li>ArrayList 中维护了一个 Object 类型的数组 elementData、transient object[] elementData（transient表示不会被序列化）</li>
+<li>当创建 ArrayList 对象时，如果使用的是无参构造器，则初始 elementData容量为0，第1次添加，则扩容 elementData 为10，如需要再次扩容，则扩容 elementData 为1.5倍</li>
+<li>如果使用的是指定大小的构造器，则初始 elementData 容量为指定大小，如果需要扩容，则直接扩容 elementData 为1.5倍</li>
+</ol>
+<h4 id="vector">Vector
+</h4><ol>
+<li>Vector 底层也是一个对象数组，protected Object[] elementData</li>
+<li>Vector 是线程同步的，即线程安全，Vector 类的操作方法带有 synchronized</li>
+<li>在开发中，需要线程同步安全时，考虑使用 Vector</li>
+</ol>
+<h4 id="linkedlist">LinkedList
+</h4><ol>
+<li>LinkedList 实现了双向链表和双端队列</li>
+<li>可以添加任意元素（元素可以重复），包括 null</li>
+<li>线程不安全，没有实现同步</li>
+</ol>
+<p>底层操作</p>
+<ol>
+<li>LinkedList 底层维护了一个双向链表</li>
+<li>LinkedList 中维护了两个属性 first 和 last 分别指向首节点和尾节点</li>
+<li>每个节点（Node对象），里面又维护了 prev、next、item 三个属性，其中通过 prev 指向前一个，通过 next 指向后一个节点，最终实现双向链表</li>
+<li>LinkedList 元素的添加和删除，不是通过数组完成的，相对来说效率较高</li>
+</ol>
+<h3 id="set-接口">Set 接口
+</h3><ol>
+<li>无序（添加和取出的顺序不一致），没有索引</li>
+<li>Set 接口的实现类的对象（Set接口对象），不允许重复元素，所以最多包含一个 null</li>
+<li>Set 接口对象存放数据是无序（即添加的顺序和取出的顺序不一致）</li>
+<li>注意：取出的顺序虽然不是添加的顺序，但是固定</li>
+</ol>
+<p>遍历元素方式
+除不支持用索引的方式获取外（即不能用普通for循环），同 collection 接口</p>
+<h4 id="hashset">HashSet
+</h4><ol>
+<li>实际上是 HashMap</li>
+<li>不保证元素是有序的，取决于 hash 后，再确定索引的结果</li>
+</ol>
+<p>底层操作</p>
+<ol>
+<li>添加一个元素时，先得到 hash 值，会转成索引值</li>
+<li>找到存储数据表 table，看这个索引位置是否已经存放元素，如果没有，直接加入；如果有，调用 equals 比较，如果相同，就放弃添加，如果不相同，则添加到最后</li>
+<li>在 Java8 中，如果一条链表的元素个数达到或超过 TREEIFY_THRESHOLD（默认是8），并且 table的大小 &gt;= MIN_TREEIFY_CAPACITY（默认64），就会进行树化（红黑树）</li>
+<li>第一次添加时，table 数组扩容到 16，临界值（threshold）是 16 * 加载因子（loadFactor = 0.75）= 12。如果 table 数组使用到了临界值 12，就会扩容到 16 * 2 = 32，新的临界值就是 32 * 0.75 = 24，依次类推</li>
+</ol>
+<h5 id="linkedhashset">LinkedHashSet
+</h5><ol>
+<li>是 HashSet 的子类</li>
+<li>底层是一个 LinkedHashMap，维护了一个数组 + 双向链表</li>
+<li>根据元素的 hashCode 值来决定元素的存储位置，同时使用链表维护元素的次序，这使得元素看起来是以插入顺序保存的</li>
+<li>不允许添加重复元素</li>
+<li>存入顺序和取出顺序一致，这点与 HashSet 不同</li>
+</ol>
+<h4 id="treeset">TreeSet
+</h4><ol>
+<li>当使用 无参构造器 创建 TreeSet 时，仍然是无序的</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		TreeSet treeSet <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeSet();
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;ano&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;tomori&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;soyo&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;rikki&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;rana&#34;</span>);
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(treeSet); <span style="color:#75715e">// 取出顺序不同于放入顺序</span>
+</span></span></code></pre></div><ol start="2">
+<li>若希望添加的元素，按照字符串大小来排序，可使用 TreeSet 提供的一个构造器，可以传入一个比较器 Comparator（匿名内部类重写该接口）并指定排序规则</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		TreeSet treeSet <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> TreeSet(<span style="color:#66d9ef">new</span> Comparator() {
+</span></span><span style="display:flex;"><span>			<span style="color:#a6e22e">@Override</span>
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">public</span> <span style="color:#66d9ef">int</span> <span style="color:#a6e22e">compare</span>(Object o1, Object o2) {
+</span></span><span style="display:flex;"><span>				<span style="color:#66d9ef">return</span> ((String)o2).<span style="color:#a6e22e">compareTo</span>((String)o1); <span style="color:#75715e">// 从大到小排序</span>
+</span></span><span style="display:flex;"><span>			}
+</span></span><span style="display:flex;"><span>		});
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;ano&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;tomori&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;soyo&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;rikki&#34;</span>);
+</span></span><span style="display:flex;"><span>		treeSet.<span style="color:#a6e22e">add</span>(<span style="color:#e6db74">&#34;rana&#34;</span>);
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(treeSet); <span style="color:#75715e">// 输出[tomori, soyo, rikki, rana, ano]</span>
+</span></span></code></pre></div><p>底层操作
+本质是 TreeMap</p>
+<h2 id="map-接口jdk-8">Map 接口（JDK 8）
+</h2><ol>
+<li>Map 与 Collection 并列存在，常用实现类有HashMap、Hashtable、Properties，用于保存具有映射关系的数据 Key-Value</li>
+<li>Map 中的 key 和 value 可以是任何引用类型的数据，会封装到 HashMap$Node 对象中</li>
+<li>Map 中的 key 不允许重复，原因和 HashSet 一样，前面分析过源码</li>
+<li>Map 中的 value 可以重复</li>
+<li>Map 的 key 可以为 null，value 也可以为 null，注意 key 为 null，只能有一个 value 为null，可以多个</li>
+<li>常用 String 类作为 Map 的 key</li>
+<li>key 和 value 之间存在单向一对一关系，即通过指定的 key 总能找到对应的 value</li>
+</ol>
+<p>常用方法</p>
+<ol>
+<li>put：添加</li>
+<li>remove：根据键删除映射关系</li>
+<li>get：根据键获取值</li>
+<li>size：获取元素个数</li>
+<li>isEmpty：判断个数是否为0</li>
+<li>clear：清除</li>
+<li>containsKey：查找键是否存在</li>
+</ol>
+<p>遍历元素方式</p>
+<ol>
+<li>支持所有的 collection 接口方法</li>
+<li>keySet：获取所有的键</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//取出所有的key，通过key取出对应的value</span>
+</span></span><span style="display:flex;"><span>		Set keySet <span style="color:#f92672">=</span> hashmap.<span style="color:#a6e22e">keySet</span>();
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;-----------keySet()增强for-----------&#34;</span>);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (Object key : keySet) {
+</span></span><span style="display:flex;"><span>			System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(key <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - &#34;</span> <span style="color:#f92672">+</span> hashmap.<span style="color:#a6e22e">get</span>(key));
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;-----------keySet()迭代器-----------&#34;</span>);
+</span></span><span style="display:flex;"><span>		Iterator iterator1 <span style="color:#f92672">=</span> keySet.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (iterator1.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>			Object key <span style="color:#f92672">=</span> iterator1.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>			System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(key <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - &#34;</span> <span style="color:#f92672">+</span> hashmap.<span style="color:#a6e22e">get</span>(key));
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div><ol start="3">
+<li>values：获取所有的值</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//取出所有的values</span>
+</span></span><span style="display:flex;"><span>		Collection values <span style="color:#f92672">=</span> hashmap.<span style="color:#a6e22e">values</span>();
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;-----------values()增强for-----------&#34;</span>);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (Object value : values) {
+</span></span><span style="display:flex;"><span>			System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(value);
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;-----------values()迭代器-----------&#34;</span>);
+</span></span><span style="display:flex;"><span>		Iterator iterator2 <span style="color:#f92672">=</span> values.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (iterator2.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>			Object value <span style="color:#f92672">=</span> iterator2.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>			System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(value);
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div><ol start="4">
+<li>entrySet：获取所有关系 k-v</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//获取k-v</span>
+</span></span><span style="display:flex;"><span>		Set entryset <span style="color:#f92672">=</span> h.<span style="color:#a6e22e">entrySet</span>();
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;-----------entrySet()增强for-----------&#34;</span>);
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">for</span> (Object obj : entryset) {
+</span></span><span style="display:flex;"><span>			Map.<span style="color:#a6e22e">Entry</span> map <span style="color:#f92672">=</span> (Map.<span style="color:#a6e22e">Entry</span>) obj;
+</span></span><span style="display:flex;"><span>			System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(map.<span style="color:#a6e22e">getKey</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - &#34;</span> <span style="color:#f92672">+</span> map.<span style="color:#a6e22e">getValue</span>());
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(<span style="color:#e6db74">&#34;-----------entrySet()迭代器-----------&#34;</span>);
+</span></span><span style="display:flex;"><span>		iterator <span style="color:#f92672">=</span> entryset.<span style="color:#a6e22e">iterator</span>();
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">while</span> (iterator.<span style="color:#a6e22e">hasNext</span>()) {
+</span></span><span style="display:flex;"><span>			Object obj <span style="color:#f92672">=</span> iterator.<span style="color:#a6e22e">next</span>();
+</span></span><span style="display:flex;"><span>			Map.<span style="color:#a6e22e">Entry</span> map <span style="color:#f92672">=</span> (Map.<span style="color:#a6e22e">Entry</span>) obj;
+</span></span><span style="display:flex;"><span>			System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(map.<span style="color:#a6e22e">getKey</span>() <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34; - &#34;</span> <span style="color:#f92672">+</span> map.<span style="color:#a6e22e">getValue</span>());
+</span></span><span style="display:flex;"><span>		}
+</span></span></code></pre></div><h3 id="hashmap">HashMap
+</h3><p>底层操作</p>
+<ol>
+<li>HashMap 底层维护了 Node 类型的数组 table，默认为 null</li>
+<li>当创建对象时，将加载因子（loadfactor）初始化为 0.75</li>
+<li>当添加 key-val 时，通过 key 的哈希值得到在 table 的索引。然后判断该索引处是否有元素，如果没有元素直接添加。如果该索引处有元素，继续判断该元素的 key 是否和准备加入的 key 相等，如果相等，则直接替换 val；如果不相等，需要判断是树结构还是链表结构，做出相应处理。如果添加时发现容量不够，则需要扩容</li>
+<li>扩容机制同HashSet</li>
+</ol>
+<h3 id="hashtable">Hashtable
+</h3><ol>
+<li>存放的元素是键值对：即 K-V</li>
+<li>Hashtable 的键和值都不能为 null</li>
+<li>Hashtable 使用方法基本上和 HashMap 一样</li>
+<li>Hashtable 是线程安全的，HashMap 是线程不安全的</li>
+</ol>
+<p>底层操作
+初始化大小为 11，达到临界值（11 * 0.75 = 8）后扩容到<strong>原来的2倍再加1</strong>（11＊2+1=23）</p>
+<h4 id="properties">Properties
+</h4><ol>
+<li>Properties 类继承自 Hashtable 类并且实现了 Map 接口，也是使用一种键值对的形式来保存数据</li>
+<li>使用特点和 Hashtable 类似</li>
+<li>Properties 还可以用于从 xxx.properties 文件中，加载数据到 Properties 类对象并进行读取和修改</li>
+<li>说明：工作后 xxx.properties 文件通常作为配置文件，这个知识点在 IO 流举例</li>
+</ol>
+<h3 id="treemap">TreeMap
+</h3><p>同 TreeSet</p>
+<h2 id="collection-工具类">Collection 工具类
+</h2><p>操作 Set、List 和 Map 等集合的工具类，提供的方法均为 static 方法</p>
+<p>常用方法</p>
+<ol>
+<li>reverse(List)：反转 List 中元素的顺序</li>
+<li>shuffle(List)：对 List 集合元素进行随机排序</li>
+<li>sort(List)：根据元素的自然顺序对指定 List 集合元素按升序排序</li>
+<li>sort(List，Comparator)：根据指定的 Comparator 产生的顺序对 List 集合元素进行排序</li>
+<li>swap(List，int，int)：将指定 List 集合中的 i 处元素和 j 处元素进行交换</li>
+<li>Object max(List)：根据元素的自然顺序，返回给定集合中的最大元素</li>
+<li>Object max(List, Comparator)：根据 Comparator 指定的顺序，返回给定集合中的最大元素</li>
+<li>Object min(List)</li>
+<li>Object min(List, Comparator)</li>
+<li>int frequency(List, Object)：返回指定集合中指定元素的出现次数</li>
+<li>void copy(List dest, List src)： 将 src 中的内容复制到 dest 中</li>
+<li>boolean replaceAll(List list, Object oldVal, Object newVal)：使用新值替换 List 对象的所有旧值</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java-basics/">Java基础</a>
+        
+    </section>
+
+
+    
+</footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_018-020/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_18-20</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_017/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_17</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_016/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_16</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_014-015/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_14-15</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_011-013/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_11-13</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Swarm&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.c922af694cc257bf1ecc41c0dd7b0430f9114ec280ccf67cd2c6ad55f5316c4e.js" defer></script>
+<script>
+    function backToTop(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      let totopBtn = document.getElementById('back-to-top');
+      if (!totopBtn) return;
+
+      totopBtn.addEventListener('click', backToTop, false);
+
+      function toggleBackToTop() {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop > 200) {
+          totopBtn.classList.add('visible');
+        } else {
+          totopBtn.classList.remove('visible');
+        }
+      }
+
+      toggleBackToTop();
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    });
+</script>
+
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<a href="#" id="back-to-top" title="返回顶部"></a>
+
+
+<style>
+  #back-to-top {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    position: fixed;
+    bottom: 5px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--body-background);
+    box-shadow: var(--shadow-l2);
+    font-size: 20px;
+    text-align: center;
+    line-height: 38px;
+    cursor: pointer;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease,
+      transform 0.4s ease,
+      background-color 0.3s ease;
+    z-index: 1000;
+  }
+
+  #back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  #back-to-top:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    transform: rotate(135deg);
+    height: 8px;
+    width: 8px;
+    border-width: 0 0 2px 2px;
+    border-color: var(--accent-color);
+    border-style: solid;
+  }
+
+  #back-to-top:hover {
+    transform: translateY(0) scale(1.1);
+    background-color: var(--accent-color);
+  }
+
+  #back-to-top:hover:before {
+    border-color: var(--accent-color-text);
+  }
+
+   
+  @media screen and (max-width: 768px) {
+    #back-to-top {
+      bottom: 5px;
+      right: var(--container-padding);
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    #back-to-top {
+      bottom: 10px;
+      right: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+
+  @media screen and (min-width: 1536px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+</style>
+
+    </body>
+</html>

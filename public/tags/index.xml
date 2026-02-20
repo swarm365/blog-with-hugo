@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Tags on Swarm&#39;s blog</title>
+        <link>https://example.org/tags/</link>
+        <description>Recent content in Tags on Swarm&#39;s blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <lastBuildDate>Sat, 18 Oct 2025 12:03:56 +0800</lastBuildDate><atom:link href="https://example.org/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Java基础</title>
+        <link>https://example.org/tags/java-basics/</link>
+        <pubDate>Sat, 18 Oct 2025 12:03:56 +0800</pubDate>
+        
+        <guid>https://example.org/tags/java-basics/</guid>
+        <description>&lt;img src="https://example.org/tags/java-basics/java.png" alt="Featured image of post Java基础" /&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
