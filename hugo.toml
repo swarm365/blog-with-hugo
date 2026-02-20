@@ -1,0 +1,9 @@
+baseURL = 'https://example.org/'
+languageCode = 'zh-cn'
+DefaultContentLanguage = 'zh-cn'
+hasCJKLanguage = true
+title = "Swarm's blog"
+theme = 'stack'
+
+[markup.goldmark.renderer]
+  unsafe = true
