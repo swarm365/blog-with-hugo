@@ -1,0 +1,909 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="常用类／包装类（Wrapper） 基本数据类型 包装类 父类 boolean Boolean char Character byte Byte Number short Short Number int Integer Number long Long Number float Float Number double Double Number 包装类 和 基本数据类型 的相互转换 以 int 和 Integer 为例\n">
+<title>Learning_Java_Day_18-20</title>
+
+<link rel='canonical' href='http://localhost:1313/post/java/learning_java_day_018-020/'>
+
+<link rel="stylesheet" href="/scss/style.min.b854309e88021541136cdc445ca4fab95efa95cdae461c13560b329efbd2ff7d.css"><meta property='og:title' content="Learning_Java_Day_18-20">
+<meta property='og:description' content="常用类／包装类（Wrapper） 基本数据类型 包装类 父类 boolean Boolean char Character byte Byte Number short Short Number int Integer Number long Long Number float Float Number double Double Number 包装类 和 基本数据类型 的相互转换 以 int 和 Integer 为例\n">
+<meta property='og:url' content='http://localhost:1313/post/java/learning_java_day_018-020/'>
+<meta property='og:site_name' content='Swarm&#39;s blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='java-basics' /><meta property='article:published_time' content='2025-10-07T11:08:23&#43;08:00'/><meta property='article:modified_time' content='2025-10-07T11:08:23&#43;08:00'/>
+<meta name="twitter:title" content="Learning_Java_Day_18-20">
+<meta name="twitter:description" content="常用类／包装类（Wrapper） 基本数据类型 包装类 父类 boolean Boolean char Character byte Byte Number short Short Number int Integer Number long Long Number float Float Number double Double Number 包装类 和 基本数据类型 的相互转换 以 int 和 Integer 为例\n">
+    <link rel="shortcut icon" href="/favicon.ico" />
+<style>
+.reveal-text {
+  background-color: #000;
+  color: #000;
+  border-radius: 2px;
+  text-shadow: none;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.reveal-text:hover {
+  background-color: transparent;
+  color: inherit;
+}
+
+[data-scheme="dark"] .reveal-text {
+  background-color: #000;
+  color: #000;
+}
+
+[data-scheme="dark"] .reveal-text:hover {
+  background-color: transparent;
+  color: #c9d1d9;
+}
+
+[data-scheme="light"] .reveal-text:hover {
+  color: #24292f;
+}
+</style>
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_a6c30e58bf92fe3a.jpg" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">❤️</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Swarm&#39;s blog</a></h1>
+            <h2 class="site-description">保持好奇，保持热爱</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://space.bilibili.com/1890508137'
+                        target="_blank"
+                        title="Bilibili"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-brand-bilibili"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 10a4 4 0 0 1 4 -4h10a4 4 0 0 1 4 4v6a4 4 0 0 1 -4 4h-10a4 4 0 0 1 -4 -4v-6" /><path d="M8 3l2 3" /><path d="M16 3l-2 3" /><path d="M9 13v-2" /><path d="M15 11v2" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/swarm365'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='mailto:neuroai@foxmail.com'
+                        target="_blank"
+                        title="neuroai@foxmail.com"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/page/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/page/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于我</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ul>
+    <li><a href="#包装类-和-基本数据类型-的相互转换">包装类 和 基本数据类型 的相互转换</a></li>
+    <li><a href="#包装类-和-string-类型-的相互转换">包装类 和 String 类型 的相互转换</a></li>
+    <li><a href="#string-类">String 类</a>
+      <ul>
+        <li><a href="#string-对象的创建方式">String 对象的创建方式</a></li>
+        <li><a href="#字符串的特性">字符串的特性</a></li>
+        <li><a href="#string-类的常见方法">String 类的常见方法</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            
+            
+            
+            <a href="/categories/tech/" style="background-color: hsl(154, 60%, 84%); color: #fff;">
+                技术
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/post/java/learning_java_day_018-020/">Learning_Java_Day_18-20</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2025-10-07T11:08:23&#43;08:00'>Oct 07, 2025</time>
+            </div>
+        
+
+        <div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-clock-edit"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M21 12a9 9 0 1 0 -9.972 8.948c.32 .034 .644 .052 .972 .052" /><path d="M12 7v5l2 2" /><path d="M18.42 15.61a2.1 2.1 0 0 1 2.97 2.97l-3.39 3.42h-3v-3l3.42 -3.39" /></svg>
+            <time class="article-time--updated" datetime='2025-10-07T11:08:23&#43;08:00'>Oct 07, 2025 11:08 CST</time>
+        </div>
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 5 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="常用类包装类wrapper">常用类／包装类（Wrapper）
+</h1><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th style="text-align: center">基本数据类型</th>
+          <th style="text-align: center">包装类</th>
+          <th style="text-align: center">父类</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td style="text-align: center">boolean</td>
+          <td style="text-align: center">Boolean</td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">char</td>
+          <td style="text-align: center">Character</td>
+          <td style="text-align: center"></td>
+      </tr>
+      <tr>
+          <td style="text-align: center">byte</td>
+          <td style="text-align: center">Byte</td>
+          <td style="text-align: center">Number</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">short</td>
+          <td style="text-align: center">Short</td>
+          <td style="text-align: center">Number</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">int</td>
+          <td style="text-align: center">Integer</td>
+          <td style="text-align: center">Number</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">long</td>
+          <td style="text-align: center">Long</td>
+          <td style="text-align: center">Number</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">float</td>
+          <td style="text-align: center">Float</td>
+          <td style="text-align: center">Number</td>
+      </tr>
+      <tr>
+          <td style="text-align: center">double</td>
+          <td style="text-align: center">Double</td>
+          <td style="text-align: center">Number</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="包装类-和-基本数据类型-的相互转换">包装类 和 基本数据类型 的相互转换
+</h2><p>以 int 和 Integer 为例</p>
+<ol>
+<li>jdk5 前的手动装箱和拆箱方式，装箱：基本类型 -&gt; 包装类型，反之，拆箱</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//手动装箱 int -&gt; Integer</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> n1 <span style="color:#f92672">=</span> 15;
+</span></span><span style="display:flex;"><span>		Integer integer <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Integer(n1);
+</span></span><span style="display:flex;"><span>		Integer integer1 <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">valueOf</span>(n1);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//手动拆箱 Integer -&gt; int</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> integer.<span style="color:#a6e22e">intValue</span>();
+</span></span></code></pre></div><ol start="2">
+<li>jdk5 及以后的自动装箱和拆箱方式</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//自动装箱 int -&gt; Integer</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> n2 <span style="color:#f92672">=</span> 37;
+</span></span><span style="display:flex;"><span>		Integer integer2 <span style="color:#f92672">=</span> n2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//自动拆箱 Integer -&gt; int</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">int</span> n3 <span style="color:#f92672">=</span> integer2;
+</span></span></code></pre></div><ol start="3">
+<li>自动装箱底层调用的是 valueOf 方法，比如 lnteger.valueOf()</li>
+</ol>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//三元运算符要视作一个整体</span>
+</span></span><span style="display:flex;"><span>		Object obj <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span> <span style="color:#f92672">?</span> <span style="color:#66d9ef">new</span> Integer(1) : <span style="color:#66d9ef">new</span> Double(5.<span style="color:#a6e22e">0</span>);
+</span></span><span style="display:flex;"><span>		System.<span style="color:#a6e22e">out</span>.<span style="color:#a6e22e">println</span>(obj); <span style="color:#75715e">// 输出 1.0</span>
+</span></span></code></pre></div><h2 id="包装类-和-string-类型-的相互转换">包装类 和 String 类型 的相互转换
+</h2><p>以 Integer 和 String 为例</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//包装类（Integer） -&gt; String</span>
+</span></span><span style="display:flex;"><span>		Integer i <span style="color:#f92672">=</span> 15; <span style="color:#75715e">//自动装箱</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//方式1</span>
+</span></span><span style="display:flex;"><span>		String str1 <span style="color:#f92672">=</span> i <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;&#34;</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//方式2</span>
+</span></span><span style="display:flex;"><span>		String str2 <span style="color:#f92672">=</span> i.<span style="color:#a6e22e">toString</span>();
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//方式3</span>
+</span></span><span style="display:flex;"><span>		String str3 <span style="color:#f92672">=</span> String.<span style="color:#a6e22e">valueOf</span>(i);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//String -&gt; 包装类（Integer）</span>
+</span></span><span style="display:flex;"><span>		String str4 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;15&#34;</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//方式1</span>
+</span></span><span style="display:flex;"><span>		Integer n1 <span style="color:#f92672">=</span> Integer.<span style="color:#a6e22e">parseInt</span>(str4); <span style="color:#75715e">// 利用自动装箱</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//方式2</span>
+</span></span><span style="display:flex;"><span>		Integer n2 <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> Integer(str4); <span style="color:#75715e">// 构造器</span>
+</span></span></code></pre></div><h2 id="string-类">String 类
+</h2><ul>
+<li>
+<p>字符串常量对象是用双引号括起的字符序列。例如：&ldquo;你好&rdquo;、&ldquo;12.97&rdquo;、&ldquo;boy&rdquo; 等</p>
+</li>
+<li>
+<p>字符串的字符使用 Unicode 字符编码，一个字符（不区分字母还是汉字）占两个字节</p>
+</li>
+<li>
+<p>String 类的常用构造方法</p>
+<ol>
+<li>String s1 = new String();</li>
+<li>String s2 = new String(String original);</li>
+<li>String s3 = new String(char[] a);</li>
+<li>String s4 = new String(char[] a, int startIndex, int count);</li>
+<li>String s5 = new String(byte[] b);</li>
+</ol>
+</li>
+<li>
+<p>String 类实现了接口 Serializable（可以串行化：可以在网络传输）、接口 Comparable（ string 对象可以比较大小）</p>
+</li>
+<li>
+<p>String 是 final 类，不能被其他的类继承</p>
+</li>
+<li>
+<p>String 有属性 private final char value[]：用于存放字符串内容</p>
+</li>
+<li>
+<p>注意：value 是一个 final 类型，不可以修改（即 value 不能指向新的地址，但是单个字符内容可以变化）</p>
+</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#66d9ef">final</span> <span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> value <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;丁&#39;</span>, <span style="color:#e6db74">&#39;真&#39;</span>};
+</span></span><span style="display:flex;"><span>		value<span style="color:#f92672">[</span>0<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;1&#39;</span>; <span style="color:#75715e">// 正确，里面的内容可以更改</span>
+</span></span><span style="display:flex;"><span>		value<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;5&#39;</span>; <span style="color:#75715e">// 同上</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">char</span><span style="color:#f92672">[]</span> v2 <span style="color:#f92672">=</span> {<span style="color:#e6db74">&#39;王&#39;</span>, <span style="color:#e6db74">&#39;源&#39;</span>};
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">// value = v2; // 报错，value指向不可更改</span>
+</span></span></code></pre></div><h3 id="string-对象的创建方式">String 对象的创建方式
+</h3><ul>
+<li>直接赋值，<code>String s = &quot;丁真&quot;;</code></li>
+</ul>
+<p>先从常量池查看是否有 <code>&quot;丁真&quot;</code> 数据空间，如果有，直接指向；如果没有则重新创建，然后指向。最终指向的是常量池的空间地址</p>
+<ul>
+<li>调用构造器，<code>String s = new String(&quot;丁真&quot;);</code></li>
+</ul>
+<p>先在堆中创建空间，里面维护了 value 属性，指向常量池的 <code>&quot;丁真&quot;</code> 空间，如果常量池没有 <code>&quot;丁真&quot;</code> ，重新创建；如果有，直接通过 value 指向。最终指向的是堆中的空间地址</p>
+<h3 id="字符串的特性">字符串的特性
+</h3><ul>
+<li>String 是一个 final 类，代表不可变的字符序列，字符串是不可变的</li>
+<li>一个字符串对象一旦被分配，其内容是不可变的</li>
+</ul>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;丁真&#34;</span>; <span style="color:#75715e">// 在常量池中创建&#34;丁真&#34;对象</span>
+</span></span><span style="display:flex;"><span>		s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;王源&#34;</span>; <span style="color:#75715e">// 在常量池中重新创建&#34;王源&#34;对象</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//共创建了2个对象</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		<span style="color:#75715e">//编译器底层会做优化，将该语句等价于 String s = &#34;理塘丁真&#34;;</span>
+</span></span><span style="display:flex;"><span>		String s <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;理塘&#34;</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;丁真&#34;</span>;
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//只创建了1个对象</span>
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-Java" data-lang="Java"><span style="display:flex;"><span>		String s1 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;理塘&#34;</span>;
+</span></span><span style="display:flex;"><span>		String s2 <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;丁真&#34;</span>;
+</span></span><span style="display:flex;"><span>		String s3 <span style="color:#f92672">=</span> s1 <span style="color:#f92672">+</span> s2; <span style="color:#75715e">// 在堆中创建，指向堆中的地址</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">//共创建了3个对象</span>
+</span></span><span style="display:flex;"><span>		<span style="color:#75715e">/* 底层是
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		StringBuilder sb = new StringBuilder();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		sb.append(a);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		sb.append(b);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		sb是在堆中，并且 append 是在原来字符串的基础上追加的
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		重要规则：
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		String c1 = &#34;芙蓉&#34; + &#34;王源&#34;; 常量相加，看的是池
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		String c1 = a + b; 变量相加，是在堆中
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">		*/</span>
+</span></span></code></pre></div><h3 id="string-类的常见方法">String 类的常见方法
+</h3><h4 id="stringbuffer">StringBuffer
+</h4><ul>
+<li>StringBuffer 的直接父类是 AbstractStringBuilder</li>
+<li>StringBuffer 实现了 Serializable，即 StringBuffer 的对象可以串行化</li>
+<li>在父类中 AbstractStringBuilder 有属性 char[] value ，不是<del>final</del>，该 value 数组存放字符串内容，引出存放在堆中的</li>
+<li>StringBuffer 是一个 final 类，不能被继承</li>
+</ul>
+<p>常用方法</p>
+<ol>
+<li>增 append</li>
+<li>删 delete(start,end)</li>
+<li>改 replace(start,end,string) ，将 start&mdash;-end 间的内容替换掉,不含 end</li>
+<li>查 indexof ，查找子串在字符串第1次出现的索引，如果找不到返回-1</li>
+<li>插 insert</li>
+<li>获取长度 length</li>
+</ol>
+<h4 id="string-vs-stringbuffer">String VS StringBuffer
+</h4><ul>
+<li>String 保存的是字符串常量，里面的值不能更改，每次 String 类的更新实际上就是更改地址，效率较低</li>
+<li>StringBuffer 保存的是字符串变量，里面的值可以更改，每次 StringBuffer 的更新实际上可以更新内容，不用每次更新地址（即创建新对象），效率较高，指向的是堆</li>
+</ul>
+<h4 id="stringbuilder">StringBuilder
+</h4><ul>
+<li>一个可变的字符序列。此类提供一个与 StringBuffer 兼容的 APl ，但不保证同步（不是线程安全的）。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候。如果可能，建议优先采用该类，因为在大多数实现中，它比 StringBuffer 要快</li>
+<li>在 StringBuilder 上的主要操作是 append 和 insert 方法，可重载这些方法以接受任意类型的数据</li>
+</ul>
+<h4 id="stringstringbuffer-和-stringbuilder-的比较">String、StringBuffer 和 StringBuilder 的比较
+</h4><ul>
+<li>
+<p>StringBuilder 和 StringBuffer 非常类似，均代表可变的字符序列，而且方法也一样</p>
+</li>
+<li>
+<p>String：不可变字符序列，效率低，但是复用率高</p>
+</li>
+<li>
+<p>StringBuffer：可变字符序列、效率较高（增删）、线程安全</p>
+</li>
+<li>
+<p>StringBuilder：可变字符序列、效率最高、线程不安全</p>
+</li>
+<li>
+<p>String 使用注意说明：
+<code>String s = &quot;a&quot;;</code> 创建了一个字符串　
+<code>s += “b&quot;;</code> 实际上原来的&quot;a&quot;字符串对象已经丢弃了，现在又产生了一个字符串 s+&ldquo;b&rdquo;（也就是&quot;ab&quot;）。如果多次执行这些改变串内容的操作，会导致大量副本字符串对象存留在内存中，降低效率。如果这样的操作放到循环中，会极大影响程序的性能。 =&gt; 结论：如果我们对 String 做大量修改，不要使用 String</p>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/java-basics/">Java基础</a>
+        
+    </section>
+
+
+    
+</footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_017/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_17</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_016/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_16</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_014-015/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_14-15</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_011-013/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_11-13</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/post/java/learning_java_day_009-010/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Learning_Java_Day_9-10</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+        2026 Swarm&#39;s blog
+    </section>
+    
+    <section class="powerby">
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.34.2">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.b0277c0244b4191a3dba885c52fe128b87d965b56623ad09a92dda62ad206e83.js" defer></script>
+<script>
+    function backToTop(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      let totopBtn = document.getElementById('back-to-top');
+      if (!totopBtn) return;
+
+      totopBtn.addEventListener('click', backToTop, false);
+
+      function toggleBackToTop() {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop > 200) {
+          totopBtn.classList.add('visible');
+        } else {
+          totopBtn.classList.remove('visible');
+        }
+      }
+
+      toggleBackToTop();
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    });
+</script>
+
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<a href="#" id="back-to-top" title="返回顶部"></a>
+
+
+<style>
+  #back-to-top {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    position: fixed;
+    bottom: 5px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--body-background);
+    box-shadow: var(--shadow-l2);
+    font-size: 20px;
+    text-align: center;
+    line-height: 38px;
+    cursor: pointer;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease,
+      transform 0.4s ease,
+      background-color 0.3s ease;
+    z-index: 1000;
+  }
+
+  #back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  #back-to-top:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    transform: rotate(135deg);
+    height: 8px;
+    width: 8px;
+    border-width: 0 0 2px 2px;
+    border-color: var(--accent-color);
+    border-style: solid;
+  }
+
+  #back-to-top:hover {
+    transform: translateY(0) scale(1.1);
+    background-color: var(--accent-color);
+  }
+
+  #back-to-top:hover:before {
+    border-color: var(--accent-color-text);
+  }
+
+   
+  @media screen and (max-width: 768px) {
+    #back-to-top {
+      bottom: 5px;
+      right: var(--container-padding);
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    #back-to-top {
+      bottom: 10px;
+      right: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+
+  @media screen and (min-width: 1536px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+</style>
+
+    </body>
+</html>
