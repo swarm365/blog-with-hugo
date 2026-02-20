@@ -1,0 +1,42 @@
+{{- partial "helper/external" (dict "Context" . "Namespace" "Vibrant") -}}
+
+{{- $opts := dict "minify" hugo.IsProduction -}}
+{{- $script := resources.Get "ts/main.ts" | js.Build $opts | fingerprint -}}
+
+<script type="text/javascript" src="{{ $script.RelPermalink }}" defer></script>
+
+{{- with resources.Get "ts/custom.ts" -}}
+    {{/* Place your custom script in HUGO_SITE_FOLDER/assets/ts/custom.ts */}}
+    {{- $customScript := . | js.Build $opts | fingerprint -}}
+    <script type="text/javascript" src="{{ $customScript.RelPermalink }}" defer></script>
+{{- end -}}
+
+<!-- Add back to top button -->
+<script>
+    function backToTop(e) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      let totopBtn = document.getElementById('back-to-top');
+      if (!totopBtn) return;
+
+      totopBtn.addEventListener('click', backToTop, false);
+
+      function toggleBackToTop() {
+        let scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+        if (scrollTop > 200) {
+          totopBtn.classList.add('visible');
+        } else {
+          totopBtn.classList.remove('visible');
+        }
+      }
+
+      toggleBackToTop();
+      window.addEventListener('scroll', toggleBackToTop, { passive: true });
+    });
+</script>

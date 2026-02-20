@@ -1,0 +1,89 @@
+<!-- Add back to top button -->
+<a href="#" id="back-to-top" title="返回顶部"></a>
+
+<!--返回顶部 CSS -->
+<style>
+  #back-to-top {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    position: fixed;
+    bottom: 5px;
+    right: 15px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--body-background);
+    box-shadow: var(--shadow-l2);
+    font-size: 20px;
+    text-align: center;
+    line-height: 38px;
+    cursor: pointer;
+    transition:
+      opacity 0.4s ease,
+      visibility 0.4s ease,
+      transform 0.4s ease,
+      background-color 0.3s ease;
+    z-index: 1000;
+  }
+
+  #back-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  #back-to-top:before {
+    content: "";
+    display: inline-block;
+    position: relative;
+    transform: rotate(135deg);
+    height: 8px;
+    width: 8px;
+    border-width: 0 0 2px 2px;
+    border-color: var(--accent-color);
+    border-style: solid;
+  }
+
+  #back-to-top:hover {
+    transform: translateY(0) scale(1.1);
+    background-color: var(--accent-color);
+  }
+
+  #back-to-top:hover:before {
+    border-color: var(--accent-color-text);
+  }
+
+  /* Responsive styles */
+  @media screen and (max-width: 768px) {
+    #back-to-top {
+      bottom: 5px;
+      right: var(--container-padding);
+      width: 30px;
+      height: 30px;
+      font-size: 16px;
+      line-height: 32px;
+    }
+  }
+
+  @media screen and (min-width: 1024px) {
+    #back-to-top {
+      bottom: 10px;
+      right: 20px;
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+
+  @media screen and (min-width: 1536px) {
+    #back-to-top {
+      bottom: 15px;
+      right: 25px;
+    }
+  }
+</style>

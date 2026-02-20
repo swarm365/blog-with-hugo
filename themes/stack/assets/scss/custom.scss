@@ -1,0 +1,203 @@
+/* Place your custom SCSS in HUGO_SITE_FOLDER/assets/scss/custom.scss */
+
+/* 头像旋转 */
+.site-avatar {
+    .site-logo {
+        /* 鼠标经过头像旋转360度 */
+        -webkit-transition: -webkit-transform 1.0s ease-out;
+        -moz-transition: -moz-transform 1.0s ease-out;
+        transition: transform 1.0s ease-out;
+    }
+    
+    &:hover .site-logo {
+        /* 鼠标经过头像旋转360度 */
+        -webkit-transform: rotateZ(360deg);
+        -moz-transform: rotateZ(360deg);
+        transform: rotateZ(360deg);
+    }
+}
+
+/* 自定义代码高亮配色方案 */
+/* =======================
+   暗色模式 - GitHub 暗色风格
+   ======================= */
+[data-scheme="dark"] {
+    --pre-background-color: #161b22 !important;
+    --pre-text-color: #c9d1d9 !important;
+    
+    .highlight,
+    pre,
+    .chroma {
+        background-color: #161b22 !important;
+        color: #c9d1d9 !important;
+    }
+    
+    /* 关键字颜色 */
+    .chroma .k,
+    .chroma .kc,
+    .chroma .kd,
+    .chroma .kn,
+    .chroma .kp,
+    .chroma .kr,
+    .chroma .kt {
+        color: #ff7b72 !important;
+    }
+    
+    /* 字符串颜色 */
+    .chroma .s,
+    .chroma .sa,
+    .chroma .sb,
+    .chroma .sc,
+    .chroma .dl,
+    .chroma .sd,
+    .chroma .s2,
+    .chroma .sh,
+    .chroma .si,
+    .chroma .sx,
+    .chroma .sr,
+    .chroma .s1,
+    .chroma .ss {
+        color: #a5d6ff !important;
+    }
+    
+    /* 函数、类名颜色 */
+    .chroma .nf,
+    .chroma .nc,
+    .chroma .na,
+    .chroma .nd,
+    .chroma .ne,
+    .chroma .nx {
+        color: #d2a8ff !important;
+    }
+    
+    /* 数字颜色 */
+    .chroma .m,
+    .chroma .mb,
+    .chroma .mf,
+    .chroma .mh,
+    .chroma .mi,
+    .chroma .il,
+    .chroma .mo {
+        color: #79c0ff !important;
+    }
+    
+    /* 注释颜色 */
+    .chroma .c,
+    .chroma .ch,
+    .chroma .cm,
+    .chroma .c1,
+    .chroma .cs,
+    .chroma .cp,
+    .chroma .cpf {
+        color: #8b949e !important;
+        font-style: italic !important;
+    }
+    
+    /* 操作符 */
+    .chroma .o,
+    .chroma .ow {
+        color: #ff7b72 !important;
+    }
+    
+    /* 普通文本 */
+    .chroma .n,
+    .chroma .p,
+    .chroma .x {
+        color: #c9d1d9 !important;
+    }
+}
+
+/* =======================
+   亮色模式 - GitHub 亮色风格
+   ======================= */
+[data-scheme="light"] {
+    --pre-background-color: #f6f8fa !important;
+    --pre-text-color: #24292f !important;
+    
+    .highlight,
+    pre,
+    .chroma {
+        background-color: #f6f8fa !important;
+        color: #24292f !important;
+    }
+    
+    /* 关键字颜色 */
+    .chroma .k,
+    .chroma .kc,
+    .chroma .kd,
+    .chroma .kn,
+    .chroma .kp,
+    .chroma .kr,
+    .chroma .kt {
+        color: #cf222e !important;
+    }
+    
+    /* 字符串颜色 */
+    .chroma .s,
+    .chroma .sa,
+    .chroma .sb,
+    .chroma .sc,
+    .chroma .dl,
+    .chroma .sd,
+    .chroma .s2,
+    .chroma .sh,
+    .chroma .si,
+    .chroma .sx,
+    .chroma .sr,
+    .chroma .s1,
+    .chroma .ss {
+        color: #0a3069 !important;
+    }
+    
+    /* 函数、类名颜色 */
+    .chroma .nf,
+    .chroma .nc,
+    .chroma .na,
+    .chroma .nd,
+    .chroma .ne,
+    .chroma .nx {
+        color: #8250df !important;
+    }
+    
+    /* 数字颜色 */
+    .chroma .m,
+    .chroma .mb,
+    .chroma .mf,
+    .chroma .mh,
+    .chroma .mi,
+    .chroma .il,
+    .chroma .mo {
+        color: #0550ae !important;
+    }
+    
+    /* 注释颜色 */
+    .chroma .c,
+    .chroma .ch,
+    .chroma .cm,
+    .chroma .c1,
+    .chroma .cs,
+    .chroma .cp,
+    .chroma .cpf {
+        color: #6e7781 !important;
+        font-style: italic !important;
+    }
+    
+    /* 操作符 */
+    .chroma .o,
+    .chroma .ow {
+        color: #cf222e !important;
+    }
+    
+    /* 普通文本 */
+    .chroma .n,
+    .chroma .p,
+    .chroma .x {
+        color: #24292f !important;
+    }
+}
+
+/* 通用样式优化 */
+.highlight {
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
