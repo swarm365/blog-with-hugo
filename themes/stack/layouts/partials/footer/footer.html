@@ -5,7 +5,7 @@
         {{ if and (.Site.Params.footer.since) (ne .Site.Params.footer.since (int (now.Format "2006"))) }}
             {{ .Site.Params.footer.since }} - 
         {{ end }}
-        {{ now.Format "2006" }} {{ default .Site.Title .Site.Copyright }}
+        {{ now.Format "2006" }} <a href="{{ .Site.BaseURL }}">{{ default .Site.Title .Site.Copyright }}</a>
     </section>
     
     <section class="powerby">
@@ -17,7 +17,8 @@
         {{- $Theme := printf `<b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="%s">Stack</a></b>` $ThemeVersion -}}
         {{- $DesignedBy := `<a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>` -}}
 
-        {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }} <br />
-        {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }}
+        {{ T "footer.builtWith" (dict "Generator" $Generator) | safeHTML }}，托管至 <a href="https://dash.cloudflare.com" target="_blank" rel="noopener">Cloudflare</a> <br />
+        {{ T "footer.designedBy" (dict "Theme" $Theme "DesignedBy" $DesignedBy) | safeHTML }} <br />
+        <img src="/gov.svg" alt="" style="height: 1.3em; vertical-align: -0.15em; margin-right: 4px;"> <a href="https://icp.gov.moe/?keyword=20260365" target="_blank">萌ICP备20260365号</a>
     </section>
 </footer>
